@@ -1,0 +1,30 @@
+div#app{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 20fr 1fr;
+    grid-template-areas: "header"
+                         "posts"
+                         "footer";
+    grid-gap: 15px;
+    min-height: 2000px;
+    max-height: 2000px;
+    border: solid red;
+}
+
+div#header{
+    display: grid;
+    grid-area: header;
+    justify-content: stretch;
+    align-content: stretch;
+    border: solid blue;
+}
+
+div#posts{
+    grid-area: posts;
+    border: solid green;
+}
+
+div#footer{
+    grid-area: footer;
+    border: solid blue;
+}
