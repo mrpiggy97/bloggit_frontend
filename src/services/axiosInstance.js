@@ -1,10 +1,13 @@
 import axios from 'axios'
 
-let baseURL = 'http://fabianjesusrivas.pythonanywhere.com'
-let localhost = 'http://localhost:8000'
+let baseURL = process.env.API_URL
+let token = window.localStorage.getItem('token')
 
 const axiosInstance = axios.create({
-    baseURL: localhost
+    baseURL: baseURL,
+    headers:{
+        Authorization: `Token ${token}`
+    }
 })
 
 export default axiosInstance
