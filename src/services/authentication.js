@@ -1,26 +1,25 @@
-import AuthenticationInstance from './AuthenticationInstance'
-import axiosInstance from './axiosInstance'
+import { withoutTokenInstance, authenticateTokenInstance } from './axiosInstances'
 
-export function login(config){
+export const login = (config) => {
 
-    data = JSON.stringify({config})
-    return AuthenticationInstance({
+    let data = JSON.stringify({config})
+    return withoutTokenInstance({
         method: 'post',
         url: '/rest-auth/login/',
         data: data
     })
 }
 
-export function logout(token){
-    return axiosInstance({
+export const logout = () => {
+    return authenticateTokenInstance({
         method: 'post',
         url: '/rest-auth/logout/',
     })
 }
 
-export function register(config){
+export const register = (config) => {
     let data = JSON.stringify(config)
-    return AuthenticationInstance({
+    return withoutTokenInstance({
         method: 'post',
         url: '/register/',
         data: data
