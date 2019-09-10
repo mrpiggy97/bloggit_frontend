@@ -1,9 +1,9 @@
-import axiosInstance from './axiosInstance'
+import { authenticateTokenInstance } from './axiosInstances'
 
-function getPosts(){
-    return axiosInstance({
+const getPosts = () => {
+    return authenticateTokenInstance({
         method: 'get',
-        url: '/posts',
+        url: '/posts/',
     })
 }
 
