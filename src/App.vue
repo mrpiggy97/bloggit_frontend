@@ -4,7 +4,8 @@
       <main-header></main-header>
     </div>
 
-    <div id="posts">
+    <div id="views">
+      <router-view></router-view>
     </div>
 
     <div id="footer">
@@ -23,23 +24,6 @@ export default {
   components:{
     MainHeader,
   },
-
-  methods:{
-    async retrievePosts(){
-      try{
-        let response = await getPosts()
-        console.log(response.data)
-      }
-
-      catch(error){
-        console.log(error)
-      }
-    }
-  },
-
-  created(){
-    this.retrievePosts()
-  }
 }
 </script>
 
