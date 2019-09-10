@@ -3,7 +3,7 @@ div#app{
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 20fr 1fr;
     grid-template-areas: "header"
-                         "posts"
+                         "views"
                          "footer";
     grid-gap: 15px;
     min-height: 2000px;
@@ -19,8 +19,8 @@ div#header{
     border: solid blue;
 }
 
-div#posts{
-    grid-area: posts;
+div#views{
+    grid-area: views;
     border: solid green;
 }
 
