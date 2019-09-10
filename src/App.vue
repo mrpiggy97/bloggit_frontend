@@ -16,7 +16,6 @@
 
 <script>
 import MainHeader from '@/components/MainHeader'
-import getPosts from '@/services/getPosts'
 export default {
 
   name: 'App',
