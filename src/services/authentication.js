@@ -4,7 +4,7 @@ export const login = (config) => {
 
     let data = JSON.stringify({config})
     return withoutTokenInstance({
-        method: 'post',
+        method: 'POST',
         url: '/rest-auth/login/',
         data: data
     })
@@ -12,7 +12,7 @@ export const login = (config) => {
 
 export const logout = () => {
     return authenticateTokenInstance({
-        method: 'post',
+        method: 'POST',
         url: '/rest-auth/logout/',
     })
 }
@@ -20,7 +20,7 @@ export const logout = () => {
 export const register = (config) => {
     let data = JSON.stringify(config)
     return withoutTokenInstance({
-        method: 'post',
+        method: 'POST',
         url: '/register/',
         data: data
     })
