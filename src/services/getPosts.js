@@ -2,7 +2,7 @@ import { authenticateTokenInstance } from './axiosInstances'
 
 const getPosts = () => {
     return authenticateTokenInstance({
-        method: 'get',
+        method: 'GET',
         url: '/posts/',
     })
 }
