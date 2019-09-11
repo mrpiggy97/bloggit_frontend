@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    authenticated: false,
+    authenticated: window.localStorage.getItem('token'),
   },
   mutations: {
     setAuthenticated(state, payload){
