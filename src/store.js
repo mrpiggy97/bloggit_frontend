@@ -9,11 +9,14 @@ export default new Vuex.Store({
   },
   mutations: {
     setAuthenticated(state, payload){
-      //payload should only be a boolean value
-      if(payload === false){
+      //payload should only be an object two values token and authenticated
+      if(state.authenticated === false && payload.authenticated === true){
+        window.localStorage.setItem('token', payload.token)
+      }
+      else if(state.authenticated === true && payload.authenticated === false){
         window.localStorage.removeItem('token')
       }
-      state.authenticated = payload
+      state.authenticated = payload.authenticated
     }
   },
   actions: {
