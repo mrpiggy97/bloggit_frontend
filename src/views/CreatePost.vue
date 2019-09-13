@@ -1,6 +1,6 @@
 <template>
     <div id="create-post">
-        <form class="post-form" @submit="createPost">
+        <form class="post-form" @submit="createPost" v-if="authenticated">
             <label for="title">title</label>
             <input type="text" id="title" maxlength="200" v-model="title"/>
             <label for="text">text</label>
@@ -9,11 +9,13 @@
             <input type="text" id="communities" maxlength="100" v-model="communities"/>
             <button type="submit">post</button>
         </form>
+        <span v-else>please login or sign up to make a post</span>
     </div>
 </template>
 
 <script>
 import makePost from '@/services/makePost'
+import { mapState } from 'vuex'
 
 export default {
     name: 'CreatePost',
@@ -27,7 +29,8 @@ export default {
     },
 
     computed:{
-        
+        ...mapState(['authenticated']),
+
         postData(){
             return{
                 title: this.title,
