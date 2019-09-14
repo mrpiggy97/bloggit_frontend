@@ -12,6 +12,8 @@
 
 <script>
 import { login } from '@/services/authentication'
+import { mapMutations } from 'vuex'
+
 export default {
     name: 'LoginForm',
 
@@ -23,15 +25,18 @@ export default {
     },
 
     methods:{
+        ...mapMutations(['setAuthenticated']),
+
         async makeLogin(e){
             e.preventDefault()
             let config = {username: this.username,  password: this.password}
             try{
                 let response = await login(config)
+                this.setAuthenticated(true, token=response.data.token)
                 console.log(response.data)
             }
             catch(error){
-                console.log(error)
+                console.log(error.request.status)
                 this.username = ''
                 this.password = ''
             }
