@@ -1,7 +1,7 @@
 <template>
   <div id="authentication">
       <login-form v-if="login"></login-form>
-      <register-form v-else-if="register"></register-form>
+      <register-form v-else></register-form>
   </div>
 </template>
 
@@ -16,11 +16,9 @@ export default {
         RegisterForm
     },
 
-    data(){
-        return{
-            //action should only be login or register
-            register: this.$route.params.action == 'register',
-            login: this.$route.params.action == 'login'
+    computed:{
+        login(){
+            return this.$route.params.action == 'login'
         }
     }
 }
