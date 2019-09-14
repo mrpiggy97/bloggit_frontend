@@ -1,4 +1,4 @@
-import authenticateTokenInstance from '@/services/axiosInstances'
+import { authenticateTokenInstance } from '@/services/axiosInstances'
 
 const makePost = (data) => {
     return authenticateTokenInstance({
