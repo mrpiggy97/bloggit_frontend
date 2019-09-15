@@ -32,7 +32,7 @@ export default {
             let config = {username: this.username,  password: this.password}
             try{
                 let response = await login(config)
-                this.setAuthenticated(true, token=response.data.token)
+                this.setAuthenticated(true, response.data.token)
                 console.log(response.data)
             }
             catch(error){

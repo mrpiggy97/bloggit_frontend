@@ -42,7 +42,7 @@ export default {
 
             try{
                 let response = await register(config)
-                this.setAuthenticated(true, token=response.data.token)
+                this.setAuthenticated(true, response.data.token)
                 console.log(response)
             }
             catch(error){
