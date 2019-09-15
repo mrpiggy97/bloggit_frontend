@@ -14,7 +14,7 @@ export const withoutTokenInstance = axios.create({
 export const authenticateTokenInstance = axios.create({
     baseURL: process.env.VUE_APP_BLOGGIT_URL,
     headers:{
-        Authorization: `Token ${window.localStorage.getItem('token')}`
+        Authorization: `Token ${window.localStorage.getItem('bloggit_token')}`
     },
     timeout: 5000
 })
