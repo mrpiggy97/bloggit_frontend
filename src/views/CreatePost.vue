@@ -1,6 +1,6 @@
 <template>
     <div id="create-post">
-        <form class="post-form" @submit="createPost" v-if="authenticated">
+        <form class="post-form" @submit="create" v-if="authenticated">
             <label for="title">title</label>
             <input type="text" id="title" maxlength="200" v-model="title"/>
             <label for="text">text</label>
@@ -52,7 +52,7 @@ export default {
             }
 
             catch(error){
-                console.log(error.request.status)
+                alert(error.request.status)
             }
         }
     }
