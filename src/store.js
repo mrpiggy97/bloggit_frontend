@@ -8,7 +8,7 @@ export default new Vuex.Store({
     authenticated: window.localStorage.getItem('token'),
   },
   mutations: {
-    setAuthenticated(state, payload, token=null){
+    setAuthenticated(state, payload, token){
       if(payload === false){
         window.localStorage.removeItem('token')
       }
