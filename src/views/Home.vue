@@ -34,13 +34,12 @@ export default {
 
       try{
         let response = await getPosts()
-        console.log(response)
         this.posts = response.data.results
         
         if(response.data.authenticated !== this.authenticated){
           //response.data.authenticated will only be changed to be false
           //no need to set token
-          this.setAuthenticated(response.data.authenticated)
+          this.setAuthenticated({newState: response.data.authenticated})
         }
       }
 

@@ -15,7 +15,7 @@
 
 <script>
 import makePost from '@/services/makePost'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
     name: 'CreatePost',
@@ -41,18 +41,21 @@ export default {
     },
 
     methods:{
+        ...mapMutations(['setAuthenticated']),
+
         async create(e){
             e.preventDefault()
             try{
                 let response = await makePost(this.postData)
-                console.log(response)
                 this.title = ''
                 this.text = ''
                 this.communities = ''
             }
 
             catch(error){
-                alert(error.request.status)
+                if(error.request.status == 401){
+                    this.setAuthenticated({newState: false})
+                }
             }
         }
     }

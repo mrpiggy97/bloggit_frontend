@@ -35,8 +35,7 @@ export default {
     async makeLogout(){
       try{
         let response = await logout()
-        console.log(response)
-        this.setAuthenticated(false, null) //new authenticated state and token
+        this.setAuthenticated({newState: false}) //new authenticated state and token
       }
       catch(error){
         console.log(error.request.status)
