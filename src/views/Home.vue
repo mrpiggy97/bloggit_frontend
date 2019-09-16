@@ -44,7 +44,10 @@ export default {
       }
 
       catch(error){
-        console.log(error.request.status)
+        if(error.request.status == 401){
+          //unauthorized error
+          this.setAuthenticated({newState: false})
+        }
       }
     }
   },
