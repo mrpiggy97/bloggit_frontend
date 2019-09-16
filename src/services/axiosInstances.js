@@ -10,11 +10,11 @@ export const withoutTokenInstance = axios.create({
 
 //all other endpoints that can and will check if request is authenticated should
 //use this axios instance
-
 export const authenticateTokenInstance = axios.create({
     baseURL: process.env.VUE_APP_BLOGGIT_URL,
     headers:{
-        Authorization: `Token ${window.localStorage.getItem('bloggit_token')}`
+        'Content-type': 'application/json',
+        'Authorization': `JWT ${window.localStorage.getItem('bloggit_token')}`
     },
     timeout: 5000
 })
