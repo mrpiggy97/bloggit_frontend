@@ -8,14 +8,14 @@ export default new Vuex.Store({
     authenticated: window.localStorage.getItem('bloggit_token'),
   },
   mutations: {
-    setAuthenticated(state, payload, token){
-      if(payload === false){
+    setAuthenticated(state, payload){
+      if(payload.newState === false){
         window.localStorage.removeItem('bloggit_token')
       }
-      else if(payload === true){
-        window.localStorage.setItem('bloggit_token', token)
+      else if(payload.newState === true){
+        window.localStorage.setItem('bloggit_token', payload.token)
       }
-      state.authenticated = payload
+      state.authenticated = payload.newState
     }
   },
   actions: {
