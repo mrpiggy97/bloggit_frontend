@@ -35,21 +35,18 @@ export default {
       try{
         let response = await getPosts()
         this.posts = response.data.results
-        
-        if(response.data.authenticated !== this.authenticated){
-          //response.data.authenticated will only be changed to be false
-          //no need to set token
-          this.setAuthenticated({newState: response.data.authenticated})
+
+        if(response.data.authenticated != this.authenticated){
+          console.log("Home view console log")
+          console.log(response.data.authenticated)
         }
       }
 
       catch(error){
-        if(error.request.status == 401){
-          //unauthorized error
-          this.setAuthenticated({newState: false})
-        }
+        console.log("HOME view error presentApp method")
+        console.log(error)
       }
-    }
+    },
   },
 
   created(){
