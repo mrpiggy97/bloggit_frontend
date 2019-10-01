@@ -1,8 +1,6 @@
 import { withoutTokenInstance, authenticateTokenInstance } from './axiosInstances'
 
-export const login = (config) => {
-
-    let data = JSON.stringify({config})
+export const login = (data) => {
     return withoutTokenInstance({
         method: 'POST',
         url: '/rest-auth/login/',
@@ -18,10 +16,9 @@ export const logout = () => {
 }
 
 export const register = (config) => {
-    let data = JSON.stringify(config)
     return withoutTokenInstance({
         method: 'POST',
         url: '/register/',
-        data: data
+        data: config
     })
 }
