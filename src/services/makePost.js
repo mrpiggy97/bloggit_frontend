@@ -1,13 +1,8 @@
-import { authenticateTokenInstance } from '@/services/axiosInstances'
-
+import { CreateModifyInstance } from '@/services/axiosInstances'
 const makePost = (data) => {
-    return authenticateTokenInstance({
+    return CreateModifyInstance({
         method: 'POST',
         url: '/posts/make-post/',
-        headers:{
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
         data: JSON.stringify(data)
     })
 }
