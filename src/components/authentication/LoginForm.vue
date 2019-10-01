@@ -32,9 +32,14 @@ export default {
             let config = {username: this.username,  password: this.password}
             try{
                 let response = await login(config)
-                this.setAuthenticated({newState: true, token: response.data.token})
+                this.setAuthenticated({
+                    newState: true,
+                    token: response.data.token,
+                    username: response.data.username
+                })
             }
             catch(error){
+                console.log("LoginForm component makeLogin method error console log")
                 console.log(error.request.status)
                 this.username = ''
                 this.password = ''
