@@ -53,6 +53,7 @@ export default {
             }
 
             catch(error){
+                console.log("CreatePost View create method console log error")
                 if(error.request.status == 401){
                     this.setAuthenticated({newState: false})
                 }

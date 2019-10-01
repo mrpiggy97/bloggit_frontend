@@ -34,16 +34,18 @@ export default {
 
       try{
         let response = await getPosts()
-        this.posts = response.data.results
-
-        if(response.data.authenticated != this.authenticated){
-          console.log("Home view console log")
+        this.posts = response.data.posts
+          console.log("Home view console log in presentApp method")        
           console.log(response.data.authenticated)
+          console.log(this.authenticated)
+
+        if(response.data.authenticated !== this.authenticated){
+          this.setAuthenticated({newState: false})
         }
       }
 
       catch(error){
-        console.log("HOME view error presentApp method")
+        console.log("Home view error presentApp method")
         console.log(error)
       }
     },

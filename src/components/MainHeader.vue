@@ -38,6 +38,7 @@ export default {
         this.setAuthenticated({newState: false}) //new authenticated state and token
       }
       catch(error){
+        console.log("MainHeader component makeLogout method console log error")
         console.log(error.request.status)
       }
     }

@@ -42,9 +42,14 @@ export default {
 
             try{
                 let response = await register(config)
-                this.setAuthenticated({newState:true, token: response.data.token})
+                this.setAuthenticated({
+                    newState:true,
+                    token: response.data.token,
+                    username: response.data.username
+                    })
             }
             catch(error){
+                console.log("RegisterForm component register user method console log error")
                 console.log(error.request.status)
                 this.username = ''
                 this.email = ''
