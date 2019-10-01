@@ -13,7 +13,16 @@ export const withoutTokenInstance = axios.create({
 export const authenticateTokenInstance = axios.create({
     baseURL: process.env.VUE_APP_BLOGGIT_URL,
     headers:{
+        'Authorization': `JWT ${window.localStorage.getItem('bloggit_token')}`
+    },
+    timeout: 5000
+})
+
+export const CreateModifyInstance = axios.create({
+    baseURL: process.env.VUE_APP_BLOGGIT_URL,
+    headers:{
         'Content-type': 'application/json',
+        'accept': 'application/json',
         'Authorization': `JWT ${window.localStorage.getItem('bloggit_token')}`
     },
     timeout: 5000
