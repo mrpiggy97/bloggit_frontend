@@ -1,7 +1,7 @@
 <template>
   <div id="post-info">
       <div class="post-header">
-          <span class="username">{{username}}</span>
+          <span class="username">{{owner.username}}</span>
           <span class="date-posted">{{date_posted}}</span>
       </div>
 
@@ -10,7 +10,7 @@
       </div>
 
       <div class="post-communities">
-          <span v-for="com in communities" :key="com.slug">{{com.slug}}</span>
+          <span v-for="com in communities" :key="com">{{com}}</span>
       </div>
 
       <div class="post-social">
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import likePost from '@/services/likePost'
+
 export default {
     name: 'PostInfo',
 
@@ -32,16 +34,29 @@ export default {
 
     data(){
         return{
-            owner: this.props.info.owner,
-            date_posted: this.props.info.date,
-            title: this.props.info.title,
-            text: this.props.info.text,
-            communities: this.props.info.communities_list,
-            likes: this.props.info.likes,
-            reports: this.props.info.reports,
-            liked: this.props.info.liked,
-            reported: this.props.info.reported,
-            uuid: this.props.info.uuid
+            owner: this.info.owner,
+            date_posted: this.info.date,
+            title: this.info.title,
+            text: this.info.text,
+            communities: this.info.communities_list,
+            likes: this.info.likes,
+            reports: this.info.reports,
+            liked: this.info.liked,
+            reported: this.info.reported,
+            uuid: this.info.uuid
+        }
+    },
+
+    methods:{
+        async like(){
+            try{
+                await likePost(this.uuid)
+                this.likes++
+            }
+            catch(error){
+                console.log("PostInfo component error console log in like method")
+                console.log(error.request.status)
+            }
         }
     }
 }
