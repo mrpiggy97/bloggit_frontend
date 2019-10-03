@@ -2,7 +2,7 @@ import { authenticateTokenInstance, withoutTokenInstance } from './axiosInstance
 
 const getPosts = () => {
     if(window.localStorage.getItem('bloggit_token')){
-        console.Console.log("getPosts service console log")
+        console.log("getPosts service console log")
         console.log(window.localStorage.getItem('bloggit_token'))
         return authenticateTokenInstance({
             method: 'GET',
