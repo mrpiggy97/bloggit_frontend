@@ -31,13 +31,13 @@ export default {
     ...mapMutations(['setAuthenticated']),
 
     async presentApp(){
-
+      
       try{
         let response = await getPosts()
-        this.posts = response.data.posts
-          console.log("Home view console log in presentApp method")        
-          console.log(response.data.authenticated)
-          console.log(this.authenticated)
+        this.posts = response.data.results
+        console.log("Home view console log in presentApp method")        
+        console.log(response.data.authenticated)
+        console.log(this.authenticated)
 
         if(response.data.authenticated !== this.authenticated){
           this.setAuthenticated({newState: false})
@@ -47,6 +47,9 @@ export default {
       catch(error){
         console.log("Home view error presentApp method")
         console.log(error)
+      }
+      finally{
+        console.log(this.posts)
       }
     },
   },
