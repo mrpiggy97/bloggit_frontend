@@ -1,4 +1,4 @@
-import { authenticateTokenInstance } from './axiosInstances'
+import { authenticateTokenInstance } from '../axiosInstances'
 
 const likeComment = (commentUUID) => {
     return authenticateTokenInstance({

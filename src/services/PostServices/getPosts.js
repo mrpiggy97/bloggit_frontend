@@ -1,4 +1,4 @@
-import { authenticateTokenInstance, withoutTokenInstance } from './axiosInstances'
+import { authenticateTokenInstance, withoutTokenInstance } from '../axiosInstances'
 
 const getPosts = () => {
     if(window.localStorage.getItem('bloggit_token')){

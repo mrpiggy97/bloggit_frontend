@@ -1,4 +1,4 @@
-import { authenticateTokenInstance } from './axiosInstances'
+import { authenticateTokenInstance } from '../axiosInstances'
 
 const reportPost = (postUUID) => {
     return authenticateTokenInstance({

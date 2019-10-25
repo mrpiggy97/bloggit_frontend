@@ -1,4 +1,4 @@
-import { CreateModifyInstance } from '@/services/axiosInstances'
+import { CreateModifyInstance } from '../axiosInstances'
 const makePost = (data) => {
     return CreateModifyInstance({
         method: 'POST',

@@ -1,4 +1,4 @@
-import { authenticateTokenInstance } from './axiosInstances'
+import { authenticateTokenInstance } from '../axiosInstances'
 
 const likePost = (postUUID) => {
     return authenticateTokenInstance({

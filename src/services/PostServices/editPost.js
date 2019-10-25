@@ -1,4 +1,4 @@
-import { authenticateTokenInstance } from '@/services/axiosInstances'
+import { authenticateTokenInstance } from '../axiosInstances'
 
 const editPost = (newData, postUUID) => {
     return authenticateTokenInstance({
