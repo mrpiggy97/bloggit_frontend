@@ -22,7 +22,8 @@
                 <span class="likes">{{likes}}</span>
                 <span v-if="reported" class="reported">reported</span>
                 <span v-else @click="report" class="report">report</span>
-                <span class="reply-box" @click="toggleReplyBox"></span>
+                <span class="reply-box" v-if="!isReply && !replyMade"
+                    @click="toggleReplyBox">in response to: {{parent_comment.owner}}</span>
             </div>
             <div v-else class="likes-reports">
                 <span class="like">like</span>
@@ -30,10 +31,12 @@
                 <span class="report">report</span>
             </div>
         </div>
-        <form class="reply-box" @submit="reply">
-            <textarea class="reply-text" v-model="replyText"></textarea>
-            <button type="submit" class="reply-button">make reply</button>
-        </form>
+        <div class="comment-reply" v-if="!isReply && !replyMade">
+            <form class="reply-box" @submit="reply" v-show="showReplyBox">
+                <textarea class="reply-text" v-model="replyText"></textarea>
+                <button type="submit" class="reply-button">make reply</button>
+            </form>
+        </div>
   </div>
 </template>
 
@@ -42,13 +45,16 @@ import { mapState, mapMutations } from 'vuex'
 
 import likeComment from '@/services/CommentServices/likeComment'
 import reportComment from '@/services/CommentServices/reportComment'
+import makeReply from '@/services/CommentServices/makeReply'
 
 export default {
 
     name: 'CommentInfo',
 
     props: {
-        info: {type: Object, required: true}
+        info: {type: Object, required: true},
+        commentfeedUUID: {type: string, required: true},
+        isReply: {type: Boolean, required: true},
     },
 
     data(){
@@ -61,12 +67,17 @@ export default {
             reports: this.info.reports,
             liked: this.info.liked,
             reported: this.info.reported,
+            //these variables will afect the layout and styling of the component
             isOriginal: this.info.is_original,
             hasParent: this.info.has_parent,
             parent: this.info.parent_comment,
-            showReplyBox: false,
             showParent: false,
-            replyText: ''
+            //these affect whether component will display a reply box or not
+            //and if to show reply box itself
+            showReplyBox: false,
+            replyText: '',
+            replyMade: false,
+            replyComment: null
         }
     },
 
@@ -135,6 +146,44 @@ export default {
             catch(error){
                 console.log(error.request.status)
                 this.logUserOut()
+            }
+        },
+
+        async reply(e){
+            e.preventDefault()
+
+            if(this.replyMade){
+                return null
+            }
+            else{
+
+                let data = {
+                    text: this.replyText,
+                    commentfeed_uuid: this.commentfeedUUID,
+                    parent_uuid: this.isOriginal ? null : this.uuid
+                }
+
+                try{
+                    //make comment, hide toggle replybox icon, hide comment-reply
+                    //div and send event listener to parent comment along
+                    //with new comment data to render it 
+                    let response = await makeReply(data)
+                    this.replyComment = response.data
+                    this.replyText = ''
+                    this.showReplyBox = false
+                    this.replyMade = true
+                    this.$emit('replyMade', this.isOriginal, this.uuid, this.replyComment)
+                }
+
+                catch(error){
+                    console.log("error ocurred at CommentInfo component at")
+                    console.log("method reply beginning at line 152")
+                    console.log(error.request.status)
+                    if(error.request.status == 401){
+                        this.logUserOut()
+                    }
+                }
+
             }
         },
 
