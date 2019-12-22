@@ -20,6 +20,18 @@ export default new Vuex.Store({
         window.localStorage.setItem('bloggit_username', payload.username)
       }
       state.authenticated = payload.newState
+    },
+
+    logUserOut(state){
+      window.localStorage.removeItem('bloggit_token')
+      window.localStorage.removeItem('bloggit_username')
+      state.authenticated = false
+    },
+
+    setUserCredentials(state, payload){
+      window.localStorage.setItem('bloggit_token', payload.token)
+      window.localStorage.setItem('bloggit_username', payload.username)
+      state.authenticated = true
     }
   },
   actions: {
