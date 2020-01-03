@@ -1,21 +1,45 @@
 <template>
-  <div id="home">
-    <post-info v-for="post in posts" :key="post.uuid" :info="post"></post-info>
+  <div id="home-view">
+    <post-info v-for="post in posts" :key="post.uuid" :info="post"
+    :previewMode="true"
+    />
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations } from 'vuex'
 
-import getPosts from '@/services/getPosts'
+import getPosts from '@/services/PostServices/getPosts'
 import PostInfo from '@/components/PostInfo'
 
 export default {
   name: 'home',
 
+  components: {
+    PostInfo
+  },
+
   data(){
     return{
-      posts: [],
+      posts: [
+        {
+          date: '12 may 2019',
+          title: 'this is the title i hope this works goddamit shit men goddamit'+
+          'work worksdald sa;d ;slkdsa s;lkdal;sdk laskdla;sdk laskdl laskdldk '+
+          'lad;ad;as adm;alsd ;laskd;la sd ;laskd  ;asldk ;lask d;asl d;laskd;la',
+          text: 'this is the the post i hope it work',
+          communities_list: ['test', 'javascript', 'hello world', 'test2'],
+          likes: 1,
+          reports: 0,
+          liked: null,
+          reported: null,
+          uuid: '1412sdfsf1223vefdgbdfb3',
+          owner: {
+            username: 'thisustheusername',
+            profile_pic: null
+          }
+        }
+      ],
     }
   },
 
@@ -23,29 +47,25 @@ export default {
     ...mapState(['authenticated'])
   },
 
-  components:{
-    PostInfo
-  },
-
   methods:{
-    ...mapMutations(['setAuthenticated']),
+    ...mapMutations(['removeUserCredentials']),
 
     async presentApp(){
       
       try{
         let response = await getPosts()
-        this.posts = response.data.results
-        console.log("Home view console log in presentApp method")        
+        this.posts = response.data.results     
         console.log(response.data.authenticated)
         console.log(this.authenticated)
 
         if(response.data.authenticated !== this.authenticated){
-          this.setAuthenticated({newState: false})
+          this.removeUserCredentials()
         }
       }
 
       catch(error){
-        console.log("Home view error presentApp method")
+        console.log("error at Home view in presentApp method beggining at line")
+        console.log("32")
         console.log(error)
       }
       finally{
@@ -53,9 +73,10 @@ export default {
       }
     },
   },
-
-  created(){
-    this.presentApp()
-  }
 }
 </script>
+
+
+<style lang="css">
+@import './css/Home.css';
+</style>

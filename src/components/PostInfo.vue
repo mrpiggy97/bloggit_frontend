@@ -1,35 +1,37 @@
 <template>
-  <div id="post-info">
-      <div class="post-header">
-          <span class="username">{{owner.username}}</span>
-          <span class="date-posted">{{date_posted}}</span>
-      </div>
+    <div :class="[previewMode ? 'post-info-preview' : 'post-info']">
+        <div class="post-header">
+            <img :src="owner.profile_pic" alt="" class="pic">
+            <span>{{owner.username}}</span>
+            <span class="date">{{date_posted}}</span>
+        </div>
+        <span class="post-title">{{title}}</span>
+        <span class="post-body" v-if="!previewMode">{{text}}</span>
 
-      <div class="post-text">
-          <span class="text">{{text}}</span>
-      </div>
+        <div class="post-footer">
+            <div class="communities">
+                <span v-for="com in communities" :key="com">{{com}}</span>
+            </div>
 
-      <div class="post-communities">
-          <span v-for="com in communities" :key="com">{{com}}</span>
-      </div>
-
-      <div class="post-social">
-          <span class="likes">{{likes}}</span>
-          <span class="reports">{{reports}}</span>
-          <span :class="['like', liked ? 'active' : 'inactive']">like</span>
-          <span :class="['report', reported ? 'active' : 'inactive']">report</span>
-      </div>
-  </div>
+            <div class="interaction">
+                <span class="likes">{{likes}}</span>
+                <span class="reports">{{reports}}</span>
+                <i :class="['fa fa-thumbs-up', liked ? 'active' : 'inactive']"></i>
+                <span :class="['report', reported ? 'active' : 'inactive']">report</span>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-import likePost from '@/services/likePost'
+import likePost from '@/services/PostServices/likePost'
 
 export default {
     name: 'PostInfo',
 
     props:{
-        info: {type: Object, required: true}
+        info: {type: Object, required: true},
+        previewMode: {type: Boolean, required: true}
     },
 
     data(){
@@ -54,7 +56,8 @@ export default {
                 this.likes++
             }
             catch(error){
-                console.log("PostInfo component error console log in like method")
+                console.log("error ocurred at PostInfo component at like method")
+                console.log("beggining at line 50")
                 console.log(error.request.status)
             }
         }
@@ -63,5 +66,5 @@ export default {
 </script>
 
 <style scoped>
-
+@import './css/PostInfo.css';
 </style>
