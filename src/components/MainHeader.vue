@@ -1,10 +1,8 @@
 <template>
-  <div id="main-header">
-      <span class="shit">icon here</span>
-      <span @click="redirectLogin">login</span>
-      <span @click="redirectRegister">register</span>
-      <span @click="redirectCreatePost">create post</span>
-      <span v-if="authenticated" @click="makeLogout">logout</span>
+  <div id="main-header-component">
+    <span>home</span>
+    <span>user</span>
+    <span>login</span>
   </div>
 </template>
 
@@ -17,11 +15,11 @@ export default {
   name: 'MainHeader',
 
   computed:{
-    ...mapState(['authenticated'])
+    ...mapState(['authenticated', 'username'])
   },
 
   methods:{
-    ...mapMutations(['setAuthenticated']),
+    ...mapMutations(['logUserOut']),
     redirectCreatePost(){
       this.$router.history.push({name: 'CreatePost'})
     },
@@ -31,17 +29,6 @@ export default {
     redirectRegister(){
       this.$router.history.push({path: '/auth/register'})
     },
-
-    async makeLogout(){
-      try{
-        let response = await logout()
-        this.setAuthenticated({newState: false}) //new authenticated state and token
-      }
-      catch(error){
-        console.log("MainHeader component makeLogout method console log error")
-        console.log(error.request.status)
-      }
-    }
   }
 }
 </script>

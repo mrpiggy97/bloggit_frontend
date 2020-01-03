@@ -1,5 +1,5 @@
-div#main-header{
+div#main-header-component{
     display: grid;
-    justify-items: center;
-    align-items: center;
+    border-style: dashed;
+    border-color: black;
 }
