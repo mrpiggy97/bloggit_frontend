@@ -1,15 +1,14 @@
 <template>
   <div id="app">
-    <div id="header">
+    <div id="app-header">
       <main-header></main-header>
     </div>
 
-    <div id="views">
+    <div id="app-views">
       <router-view></router-view>
     </div>
 
-    <div id="footer">
-
+    <div id="app-footer">
     </div>
   </div>
 </template>
