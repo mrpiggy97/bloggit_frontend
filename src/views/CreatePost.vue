@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import makePost from '@/services/makePost'
+import makePost from '@/services/PostServices/makePost'
 import { mapState, mapMutations } from 'vuex'
 
 export default {
@@ -24,7 +24,8 @@ export default {
         return{
             title: '',
             text: '',
-            communities: ''
+            communities: '',
+            newPost : ''
         }
     },
 
@@ -41,7 +42,7 @@ export default {
     },
 
     methods:{
-        ...mapMutations(['setAuthenticated']),
+        ...mapMutations(['removeUserCredentials']),
 
         async create(e){
             e.preventDefault()
@@ -50,12 +51,14 @@ export default {
                 this.title = ''
                 this.text = ''
                 this.communities = ''
+                this.newPost = response.data
             }
 
             catch(error){
-                console.log("CreatePost View create method console log error")
+                console.log("error ocurred at CreatePost component at create")
+                console.log("method beggining at line 47")
                 if(error.request.status == 401){
-                    this.setAuthenticated({newState: false})
+                 this.removeUserCredentials()   
                 }
             }
         }

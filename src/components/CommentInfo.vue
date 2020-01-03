@@ -124,7 +124,7 @@ export default {
     },
 
     methods:{
-        ...mapMutations(['logUserOut']),
+        ...mapMutations(['removeUserCredentials']),
 
         async like(e){
             e.preventDefault()
@@ -134,7 +134,7 @@ export default {
             }
             catch(error){
                 console.log(error.request.status)
-                this.logUserOut()
+                this.removeUserCredentials()
             }
         },
 
@@ -145,7 +145,7 @@ export default {
             }
             catch(error){
                 console.log(error.request.status)
-                this.logUserOut()
+                this.removeUserCredentials()
             }
         },
 
@@ -180,7 +180,7 @@ export default {
                     console.log("method reply beginning at line 152")
                     console.log(error.request.status)
                     if(error.request.status == 401){
-                        this.logUserOut()
+                        this.removeUserCredentials()
                     }
                 }
 
