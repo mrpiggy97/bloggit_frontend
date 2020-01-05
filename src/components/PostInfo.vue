@@ -10,14 +10,20 @@
 
         <div class="post-footer">
             <div class="communities">
-                <span v-for="com in communities" :key="com">{{com}}</span>
+                <span class="community">c/{{community}}</span>
             </div>
 
             <div class="interaction">
                 <span class="likes">{{likes}}</span>
                 <span class="reports">{{reports}}</span>
-                <i :class="['fa fa-thumbs-up', liked ? 'active' : 'inactive']"></i>
-                <span :class="['report', reported ? 'active' : 'inactive']">report</span>
+                <i v-if="!liked && authenticated" @click="like"
+                    class='fa fa-thumbs-up inactive'>
+                </i>
+                <i v-else-if="liked && authenticated"
+                    class="fa fa-thumbs-up active"></i>
+                <i v-else-if="!authenticated" class="fa fa-thumbs-up inactive"></i>
+                <span v-if="!reported && authenticated" class="report">report</span>
+                <span v-else-if="!authenticated" class="report">report</span>
             </div>
         </div>
     </div>
@@ -25,6 +31,8 @@
 
 <script>
 import likePost from '@/services/PostServices/likePost'
+import reportPost from '@/services/PostServices/reportPost'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
     name: 'PostInfo',
@@ -40,7 +48,7 @@ export default {
             date_posted: this.info.date,
             title: this.info.title,
             text: this.info.text,
-            communities: this.info.communities_list,
+            community: this.info.community,
             likes: this.info.likes,
             reports: this.info.reports,
             liked: this.info.liked,
@@ -49,16 +57,53 @@ export default {
         }
     },
 
+    computed:{
+        ...mapState(['authenticated'])
+    },
+
     methods:{
+        ...mapMutations(['removeUserCredentials']),
         async like(){
-            try{
-                await likePost(this.uuid)
-                this.likes++
+            //just in case, if else statements in template should take care
+            //handle wether or not we should make a call to the backend
+            if(!this.reported && this.authenticated){
+                try{
+                    await likePost(this.uuid)
+                    this.likes++
+                }
+                catch(error){
+                    console.log("error ocurred at PostInfo component at like method")
+                    console.log("beggining at line 50")
+                    console.log(error.request.status)
+                    if(error.request.status == 401){
+                        this.removeUserCredentials()
+                    }
+                }                
             }
-            catch(error){
-                console.log("error ocurred at PostInfo component at like method")
-                console.log("beggining at line 50")
-                console.log(error.request.status)
+            else{
+                return null
+            }
+        },
+
+        async report(){
+            //just in case, if else statements in template should handle
+            //whether or not we should make a call to the backend
+            if(!this.reported && this.authenticated){
+                try{
+                    await reportPost(this.uuid)
+                    this.reported = true
+                }
+                catch(error){
+                    console.log("error ocurred in PostInfo component at report")
+                    console.log("method beggining at line 79")
+                    console.log(error.request.status)
+                    if(error.request.status == 401){
+                        this.removeUserCredentials()
+                    }
+                }                
+            }
+            else{
+                return null
             }
         }
     }

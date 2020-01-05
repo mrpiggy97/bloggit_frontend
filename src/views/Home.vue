@@ -28,7 +28,7 @@ export default {
           'work worksdald sa;d ;slkdsa s;lkdal;sdk laskdla;sdk laskdl laskdldk '+
           'lad;ad;as adm;alsd ;laskd;la sd ;laskd  ;asldk ;lask d;asl d;laskd;la',
           text: 'this is the the post i hope it work',
-          communities_list: ['test', 'javascript', 'hello world', 'test2'],
+          community: 'this is the community let see how long can it be before',
           likes: 1,
           reports: 0,
           liked: null,
