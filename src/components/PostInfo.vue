@@ -10,7 +10,8 @@
 
         <div class="post-footer">
             <div class="communities">
-                <span class="community">c/{{community}}</span>
+                <span v-for="com in communities" :key="com"
+                    class="community">c/{{com}}</span>
             </div>
 
             <div class="interaction">
@@ -48,7 +49,7 @@ export default {
             date_posted: this.info.date,
             title: this.info.title,
             text: this.info.text,
-            community: this.info.community,
+            communities: this.info.communities,
             likes: this.info.likes,
             reports: this.info.reports,
             liked: this.info.liked,
