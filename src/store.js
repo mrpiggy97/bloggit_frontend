@@ -17,7 +17,7 @@ export default new Vuex.Store({
       else if(payload.newState === true){
         window.localStorage.setItem('bloggit_token', payload.token)
         window.localStorage.setItem('bloggit_username', payload.username)
-        window.localStorage.removeItem('bloggit_profile_pic')
+        window.localStorage.removeItem('bloggit_profile_pic', payload.profile_pic)
 
       }
       state.authenticated = payload.newState
@@ -33,7 +33,7 @@ export default new Vuex.Store({
     setUserCredentials(state, payload){
       window.localStorage.setItem('bloggit_token', payload.token)
       window.localStorage.setItem('bloggit_username', payload.username)
-      window.localStorage.setItem('bloggit_profile_pic')
+      window.localStorage.setItem('bloggit_profile_pic', payload.profile_pic)
       state.authenticated = true
     }
   },
