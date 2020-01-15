@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
-import Authentication from './views/Authentication.vue'
-import CreatePost from './views/CreatePost.vue'
+import Authentication from './views/Authentication'
+import CreatePost from './views/CreatePost'
+import CommunityView from './views/CommunityView'
 
 Vue.use(Router)
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/create-post',
       name: 'CreatePost',
       component: CreatePost
+    },
+    {
+      path: '/community/:community',
+      name: 'community',
+      component: CommunityView
     }
   ]
 })
