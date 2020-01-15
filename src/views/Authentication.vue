@@ -16,9 +16,9 @@ export default {
         RegisterForm
     },
 
-    computed:{
-        login(){
-            return this.$route.params.action == 'login'
+    data(){
+        return{
+            login: this.$route.params.action == 'login'
         }
     }
 }
