@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { register } from '@/services/authentication'
 
 export default {
@@ -30,6 +31,7 @@ export default {
     },
 
     methods:{
+        ...mapMutations(['setUserCredentials']),
         async registerUser(e){
             e.preventDefault()
             
@@ -42,14 +44,11 @@ export default {
 
             try{
                 let response = await register(config)
-                this.setAuthenticated({
-                    newState:true,
-                    token: response.data.token,
-                    username: response.data.username
-                    })
+                this.setUserCredentials(response.data)
             }
             catch(error){
-                console.log("RegisterForm component register user method console log error")
+                console.log("error ocurred in RegisterForm component at register")
+                console.log("method")
                 console.log(error.request.status)
                 this.username = ''
                 this.email = ''
