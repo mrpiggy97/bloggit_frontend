@@ -25,21 +25,19 @@ export default {
     },
 
     methods:{
-        ...mapMutations(['setAuthenticated']),
+        ...mapMutations(['setUserCredentials']),
 
         async makeLogin(e){
             e.preventDefault()
             let config = {username: this.username,  password: this.password}
             try{
                 let response = await login(config)
-                this.setAuthenticated({
-                    newState: true,
-                    token: response.data.token,
-                    username: response.data.username
-                })
+                this.setUserCredentials(response.data)
+                this.$router.history.push({name: 'home'})
             }
             catch(error){
-                console.log("LoginForm component makeLogin method error console log")
+                console.log("error ocurred at LoginForm component at makeLogin")
+                console.log("method")
                 console.log(error.request.status)
                 this.username = ''
                 this.password = ''
