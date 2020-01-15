@@ -11,6 +11,7 @@
         <div class="post-footer">
             <div class="communities">
                 <span v-for="com in communities" :key="com"
+                    @click="redirectCommunity(com)"
                     class="community">c/{{com}}</span>
             </div>
 
@@ -74,7 +75,6 @@ export default {
                 }
                 catch(error){
                     console.log("error ocurred at PostInfo component at like method")
-                    console.log("beggining at line 50")
                     console.log(error.request.status)
                     if(error.request.status == 401){
                         this.removeUserCredentials()
@@ -96,7 +96,6 @@ export default {
                 }
                 catch(error){
                     console.log("error ocurred in PostInfo component at report")
-                    console.log("method beggining at line 79")
                     console.log(error.request.status)
                     if(error.request.status == 401){
                         this.removeUserCredentials()
@@ -106,6 +105,13 @@ export default {
             else{
                 return null
             }
+        },
+
+        redirectCommunity(community){
+            this.$router.history.push({
+                name: 'community',
+                params: {'community': community}
+            })
         }
     }
 }
