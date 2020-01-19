@@ -28,7 +28,7 @@ export default {
           'work worksdald sa;d ;slkdsa s;lkdal;sdk laskdla;sdk laskdl laskdldk '+
           'lad;ad;as adm;alsd ;laskd;la sd ;laskd  ;asldk ;lask d;asl d;laskd;la',
           text: 'this is the the post i hope it work',
-          communities: ['this is the community let see how long can it be before'],
+          communities: ['this is the community let see how long can it be,'],
           likes: 1,
           reports: 0,
           liked: null,
@@ -37,7 +37,21 @@ export default {
           owner: {
             username: 'thisustheusername',
             profile_pic: null
-          }
+          },
+        },
+        {
+        date: '12 may 2019',
+        title: 'this is the title i hope this works goddamit shit men goddamit'+
+        'work worksdald sa;d ;slkdsa s;lkdal;sdk laskdla;sdk laskdl laskdldk '+
+        'lad;ad;as adm;alsd ;laskd;la sd ;laskd  ;asldk ;lask d;asl d;laskd;la',
+        text: 'this is the the post i hope it work',
+        communities: ['this is the community let see how long can it be before'],
+        likes: 1,
+        reports: 0,
+        liked: null,
+        reported: null,
+        uuid: '1412sdfsf1223vsssefdgbdfb3',
+        owner: { username: 'thisustheusername', profile_pic: null}
         }
       ],
     }
