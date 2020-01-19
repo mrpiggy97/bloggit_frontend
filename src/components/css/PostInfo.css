@@ -2,10 +2,10 @@ div.post-info{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 5fr 2fr;
-    grid-template-areas: "post-header"
-                         "post-title"
-                         "post-body"
-                         "post-footer";
+    grid-template-areas:    "post-header"
+                            "post-title"
+                            "post-body"
+                            "post-footer";
     grid-gap: 20px;
     justify-self: stretch;
     border-style: solid;
@@ -17,9 +17,9 @@ div.post-info-preview{
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 3fr 2fr;
-    grid-template-areas: "post-header"
-                         "post-title"
-                         "post-footer";
+    grid-template-areas:    "post-header"
+                            "post-title"
+                            "post-footer";
     grid-gap: 20px;
     justify-self: stretch;
     border-style: solid;
@@ -104,7 +104,7 @@ span.community:hover{
 
 div.interaction{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
     grid-area: interaction;
 }
