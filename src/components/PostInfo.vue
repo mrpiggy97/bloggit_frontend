@@ -14,18 +14,18 @@
                     @click="redirectCommunity(com)"
                     class="community">c/{{com}}</span>
             </div>
-
-            <div class="interaction">
+            
+            <div class="interaction" v-if="authenticated">
                 <span class="likes">{{likes}}</span>
-                <span class="reports">{{reports}}</span>
-                <i v-if="!liked && authenticated" @click="like"
-                    class='fa fa-thumbs-up inactive'>
-                </i>
-                <i v-else-if="liked && authenticated"
-                    class="fa fa-thumbs-up active"></i>
-                <i v-else-if="!authenticated" class="fa fa-thumbs-up inactive"></i>
-                <span v-if="!reported && authenticated" class="report">report</span>
-                <span v-else-if="!authenticated" class="report">report</span>
+                <i v-if="!liked" class="fa fa-thumbs-up inactive" @click="like"></i>
+                <i v-else class="fa fa-thumbs-up active"></i>
+                <span v-if="!reported" class="report">report</span>
+            </div>
+
+            <div class="interaction" v-else>
+                <span class="likes">{{likes}}</span>
+                <i class="fa fa-thumbs-up inactive"></i>
+                <span class="report">report</span>
             </div>
         </div>
     </div>
@@ -112,7 +112,7 @@ export default {
                 name: 'community',
                 params: {'community': community}
             })
-        }
+        },
     }
 }
 </script>
