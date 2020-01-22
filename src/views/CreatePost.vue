@@ -56,7 +56,7 @@ export default {
 
             catch(error){
                 console.log("error ocurred at CreatePost component at create")
-                console.log("method beggining at line 47")
+                console.log("method")
                 if(error.request.status == 401){
                  this.removeUserCredentials()   
                 }
