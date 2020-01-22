@@ -1,7 +1,7 @@
 <template>
   <div id="main-header">
     <div id="basic-menu">
-      <span @click="redirectHome">home</span>
+      <span @click="goToHome">home</span>
       <form id="search-form">
         <input type="text" v-model="query" id="search-text" maxlength="100"/>
         <button type="submit" id="search-button"><i class="fa fa-search"></i></button>
@@ -14,7 +14,7 @@
       <span v-if="authenticated">{{username}}</span>
       <span v-if="authenticated" @click="fakeLogout">logout</span>
       <span v-if="!authenticated" @click="fakeLogin">login</span>
-      <span v-if="!authenticated" @click="redirectRegister">register</span>
+      <span v-if="!authenticated" @click="goToRegister">register</span>
     </div>
   </div>
 </template>
@@ -56,19 +56,19 @@ export default {
   methods:{
     ...mapMutations(['removeUserCredentials', 'setUserCredentials']),
 
-    redirectCreatePost(){
+    gotToCreatePost(){
       this.$router.history.push({name: 'CreatePost'})
     },
 
-    redirectHome(){
+    gotToHome(){
       this.$router.history.push({name: 'home'})
     },
 
-    redirectLogin(){
+    gotToLogin(){
       this.$router.history.push({name: 'authentication', params: {action: 'login'}})
     },
 
-    redirectRegister(){
+    gotToRegister(){
       this.$router.history.push({name: 'authentication', params: {action: 'register'}})
     },
 
@@ -80,7 +80,6 @@ export default {
         }
         catch(error){
           console.log("error at MainHeader component at makeLogout method")
-          console.log("beggining at line 34");
           console.log(error.request.status);
         }
       }
