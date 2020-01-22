@@ -11,7 +11,7 @@
         <div class="post-footer">
             <div class="communities">
                 <span v-for="com in communities" :key="com"
-                    @click="redirectCommunity(com)"
+                    @click="goToCommunity(com)"
                     class="community">c/{{com}}</span>
             </div>
             
@@ -107,7 +107,7 @@ export default {
             }
         },
 
-        redirectCommunity(community){
+        goToCommunity(community){
             this.$router.history.push({
                 name: 'community',
                 params: {'community': community}
