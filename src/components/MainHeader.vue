@@ -56,19 +56,19 @@ export default {
   methods:{
     ...mapMutations(['removeUserCredentials', 'setUserCredentials']),
 
-    gotToCreatePost(){
+    goToCreatePost(){
       this.$router.history.push({name: 'CreatePost'})
     },
 
-    gotToHome(){
+    goToHome(){
       this.$router.history.push({name: 'home'})
     },
 
-    gotToLogin(){
+    goToLogin(){
       this.$router.history.push({name: 'authentication', params: {action: 'login'}})
     },
 
-    gotToRegister(){
+    goToRegister(){
       this.$router.history.push({name: 'authentication', params: {action: 'register'}})
     },
 
