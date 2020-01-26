@@ -6,13 +6,13 @@ const getPosts = (page = 1) => {
         console.log(window.localStorage.getItem('bloggit_token'))
         return authenticateTokenInstance({
             method: 'GET',
-            url: `/posts/?page=${page}/`,
+            url: `/posts/?page=${page}`,
         })        
     }
     else{
         return withoutTokenInstance({
             method: 'GET',
-            url: `/posts/?page=${page}/`
+            url: `/posts/?page=${page}`
         })
     }
 }
