@@ -42,8 +42,8 @@ export default {
       try{
         let response = await getPosts(page)
         this.posts = response.data.results
-        this.nextPage = response.next_page
-        this.previousPage = response.previous_page
+        this.nextPage = response.data.next_page
+        this.previousPage = response.data.previous_page
 
         if(response.data.authenticated !== this.authenticated){
           this.removeUserCredentials()
@@ -51,17 +51,14 @@ export default {
       }
 
       catch(error){
-        console.log("error at Home view in presentApp method")
+        console.log("error at Home view in getPagePosts method")
         console.log(error)
-      }
-      finally{
-        console.log(this.posts)
       }
     },
   },
 
   created(){
-    this.getPagePosts(1)//1 for inital posts
+    this.getPagePosts(1)//1 for first page posts
   }
 }
 </script>
