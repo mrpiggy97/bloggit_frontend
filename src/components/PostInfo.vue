@@ -3,7 +3,7 @@
         <div class="post-header">
             <img :src="owner.profile_pic" alt="" class="pic">
             <span>{{owner.username}}</span>
-            <span class="date">{{date_posted}}</span>
+            <span class="date">{{date}}</span>
         </div>
         <span class="post-title">{{title}}</span>
         <span class="post-body" v-if="!previewMode">{{text}}</span>
@@ -47,7 +47,7 @@ export default {
     data(){
         return{
             owner: this.info.owner,
-            date_posted: this.info.date,
+            date: this.info.date,
             title: this.info.title,
             text: this.info.text,
             communities: this.info.communities,
@@ -68,10 +68,11 @@ export default {
         async like(){
             //just in case, if else statements in template should take care
             //handle wether or not we should make a call to the backend
-            if(!this.reported && this.authenticated){
+            if(!this.liked && this.authenticated){
                 try{
                     await likePost(this.uuid)
                     this.likes++
+                    this.liked = true
                 }
                 catch(error){
                     console.log("error ocurred at PostInfo component at like method")
