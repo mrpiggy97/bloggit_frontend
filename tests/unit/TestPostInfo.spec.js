@@ -5,6 +5,7 @@ import PostInfo from '@/components/PostInfo'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 jest.mock("@/services/PostServices/likePost")
+jest.mock("@/services/PostServices/reportPost")
 
 describe('test PostInfo component when user is not authenticated', () => {
 
@@ -56,6 +57,10 @@ describe('test PostInfo component when user is not authenticated', () => {
         expect(wrapper.find('.inactive').exists()).toBe(true)
         expect(wrapper.vm.likes).toBe(1)
         expect(wrapper.vm.liked).toBe(null)
+        //the same goes for report method
+        await wrapper.vm.report()
+        expect(wrapper.vm.reported).toBe(null)
+        expect(wrapper.find('.report').exists()).toBe(true)
     })
 })
 
@@ -100,5 +105,13 @@ describe('test that features dependant on authentication work properly', () => {
         //anymore
         expect(wrapper.find('.inactive').exists()).toBe(false)
         expect(wrapper.find('.active').exists()).toBe(true)
+    })
+
+    it('checks report method works as expected', async () => {
+        expect(wrapper.find('.report').exists()).toBe(true)
+        
+        await wrapper.vm.report()
+        expect(wrapper.vm.reported).toBe(true)
+        expect(wrapper.find('report').exists()).toBe(false)
     })
 })
