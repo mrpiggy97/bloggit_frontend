@@ -4,8 +4,9 @@ import PostInfo from '@/components/PostInfo'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
+jest.mock("@/services/PostServices/likePost")
 
-describe('test if PostInfo component renders normally', () => {
+describe('test PostInfo component when user is not authenticated', () => {
 
     //mainly to mock vuex
     let wrapperConfig = {
@@ -45,5 +46,59 @@ describe('test if PostInfo component renders normally', () => {
         wrapper.setProps({previewMode: false})
 
         expect(wrapper.find('.post-body').exists()).toBe(true)
+    })
+
+    it('checks that elements and methods work as expected ', async () => {
+        expect(wrapper.find('.inactive').exists()).toBe(true)
+        await wrapper.vm.like()
+        //if like is invoked when user is not authenticated method should return
+        //null therefore not doing anything that affects liked and likes fields
+        expect(wrapper.find('.inactive').exists()).toBe(true)
+        expect(wrapper.vm.likes).toBe(1)
+        expect(wrapper.vm.liked).toBe(null)
+    })
+})
+
+describe('test that features dependant on authentication work properly', () => {
+
+    let wrapperConfig = {
+        propsData: {
+            info: {
+                owner: {username: 'testuser', profile_pic: null},
+                date: "13 april 2020",
+                title: "this is a post",
+                text: "this is the text",
+                communities: ['mock'],
+                likes: 1,
+                liked: false,
+                reported: false
+            },
+            previewMode: true
+        },
+        computed:{
+            authenticated(){
+                return true
+            }
+        },
+        methods:{
+            removeUserCredentials(){
+                this.authenticated = false
+            }
+        },
+        localVue
+    }
+
+    let wrapper = shallowMount(PostInfo, wrapperConfig)
+
+    it('checks that like method works as expected', async () => {
+        expect(wrapper.find('.inactive').exists()).toBe(true)
+        await wrapper.vm.like()
+        expect(wrapper.vm.likes).toBe(2)
+        expect(wrapper.vm.liked).toBe(true)
+
+        //once a like has been given the function should not affect the dom
+        //anymore
+        expect(wrapper.find('.inactive').exists()).toBe(false)
+        expect(wrapper.find('.active').exists()).toBe(true)
     })
 })
